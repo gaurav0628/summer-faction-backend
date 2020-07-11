@@ -1,3 +1,2 @@
-# summer-faction-backend
-Repository to hold faction backend apis.
-this is a change
+# summerhacks-backend
+This branch holds apis for backend of the project
