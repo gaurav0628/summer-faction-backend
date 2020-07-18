@@ -35,4 +35,4 @@ const CourseSchema = new Schema({
     required: Date.now,
   },
 });
-module.exports = Courses = mongoose.model("courses", courseSchema);
+module.exports = Courses = mongoose.model("courses", CourseSchema);
