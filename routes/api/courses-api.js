@@ -15,10 +15,12 @@ router.post("/getCourses", (req, res) => {
   if(!isValid){
     return res.status(400).json(errors);
   }
-  Courses.findOne({
-    email: req.body.email,
-  }).then((courses) => {
-      res.json(courses);
+  Courses.findOne({ email: req.body.email, }).then((courses) => {
+      if(courses){
+        res.json(courses);
+      }else{
+        res.json({email: "No courses registered for the user"});
+      }
   }).catch((err) => console.log(err));
 });
 
