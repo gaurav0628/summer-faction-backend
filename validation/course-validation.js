@@ -40,10 +40,11 @@ module.exports = function validateCoursesInput(data) {
 module.exports = function validateCoursesOutput(data) {
   let errors = {};
   // Email checks
+  data.email = !isEmpty(data.email) ? data.email : "";
   if (Validator.isEmpty(data.email)) {
-    errors.email = "Email field is required";
+    errors.email = "Email field is required.";
   } else if (!Validator.isEmail(data.email)) {
-    errors.email = "No courses registered for this email/user.";
+    errors.email = "Invalid email.";
   }
 
   return {
