@@ -12,16 +12,18 @@ const Courses = require("../../models/courses");
 //get method
 router.post("/getCourses", (req, res) => {
   const { errors, isValid } = validateCoursesOutput(req.body);
-  if(!isValid){
+  if (!isValid) {
     return res.status(400).json(errors);
   }
-  Courses.findOne({ email: req.body.email, }).then((courses) => {
-      if(courses){
+  Courses.findOne({ email: req.body.email })
+    .then((courses) => {
+      if (courses) {
         res.json(courses);
-      }else{
-        res.json({email: "No courses registered for the user"});
+      } else {
+        res.json({ email: "No courses registered for the user" });
       }
-  }).catch((err) => console.log(err));
+    })
+    .catch((err) => console.log(err));
 });
 
 //write method
@@ -62,5 +64,32 @@ router.post("/writeCourses", (req, res) => {
 function GenerateUniqueID() {
   return Math.floor(Math.random() * 10000000000000001);
 }
+
+//drop courses
+router.post("/dropCourses", (req, res) => {
+  Courses.deleteOne({
+    email: req.body.email,
+    course_name: req.body.course_name,
+  }).then((courses) => {
+    if (courses) {
+      res.json({ courses: "Course deleted." });
+    } else {
+      return res.status(400).json({ courses: "Course not found." });
+    }
+  });
+});
+
+//drop all courses
+router.post("/dropAllCourses", (req, res) => {
+  Courses.deleteMany({
+    email: req.body.email,
+  }).then((courses) => {
+    if (courses) {
+      res.json({ courses: "Deleted all courses." });
+    } else {
+      return res.status(400).json({ courses: "Course(s) not found." });
+    }
+  });
+});
 
 module.exports = router;
