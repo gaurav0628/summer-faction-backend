@@ -10,8 +10,8 @@ app.use(function(req, res, next) {
   next();
 });
 // Load input validation
-const validateRegisterInput = require("../../validation/register");
-const validateLoginInput = require("../../validation/login");
+const validateRegisterInput = require("../../validation/user-api/register");
+const validateLoginInput = require("../../validation/user-api/login");
 // Load User model
 const User = require("../../models/user");
 
@@ -77,8 +77,7 @@ router.post("/login", (req, res) => {
         // Create JWT Payload
         const payload = {
           id: user.id,
-          first_name: user.first_name,
-          last_name: user.last_name,
+          email: user.email
         };
         // Sign token
         jwt.sign(
@@ -91,6 +90,7 @@ router.post("/login", (req, res) => {
             res.json({
               success: true,
               token: "Bearer " + token,
+              user
             });
           }
         );

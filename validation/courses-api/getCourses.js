@@ -7,7 +7,7 @@ module.exports = function validateCoursesInput(data) {
   data.course_name = !isEmpty(data.course_name) ? data.course_name : "";
   // Courses checks
   if (Validator.isEmpty(data.course_name)) {
-    errors.course_name = "Enter course name.";
+    errors.course_name = "Course Name field is required.";
   }
   // First Name checks
   if (Validator.isEmpty(data.first_name)) {
@@ -31,22 +31,6 @@ module.exports = function validateCoursesInput(data) {
   if (Validator.isEmpty(data.expected_end_date)) {
     errors.expected_end_date = "Enter expected end date.";
   }
-  return {
-    errors,
-    isValid: isEmpty(errors),
-  };
-};
-
-module.exports = function validateCoursesOutput(data) {
-  let errors = {};
-  // Email checks
-  data.email = !isEmpty(data.email) ? data.email : "";
-  if (Validator.isEmpty(data.email)) {
-    errors.email = "Email field is required.";
-  } else if (!Validator.isEmail(data.email)) {
-    errors.email = "Invalid email.";
-  }
-
   return {
     errors,
     isValid: isEmpty(errors),
