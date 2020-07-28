@@ -4,17 +4,17 @@ const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const auth = require("../../middleware/auth");
 // Load input validation
-const validateWriteCoursesInput = require("../../validation/courses-api/writeCourses");
-const validateCoursesOutput = require("../../validation/courses-api/getCourses");
-const validateDropCoursesInput = require("../../validation/courses-api/dropCourses");
-const validateDropAllCoursesInput = require("../../validation/courses-api/dropAllCourses");
+const validateWriteCoursesInputVar = require("../../validation/courses-api/writeCourses");
+const validateCoursesInputVar = require("../../validation/courses-api/getCourses");
+const validateDropCoursesInputVar = require("../../validation/courses-api/dropCourses");
+const validateDropAllCoursesInputVar = require("../../validation/courses-api/dropAllCourses");
 
 // Load courses model
 const Courses = require("../../models/courses");
 
 //get method
 router.post("/getCourses", auth, (req, res) => {
-  const { errors, isValid } = validateWriteCoursesInput(req.body);
+  const { errors, isValid } = validateCoursesInputVar(req.body);
   if (!isValid) {
     return res.status(400).json(errors);
   }
@@ -32,7 +32,7 @@ router.post("/getCourses", auth, (req, res) => {
 //write method
 router.post("/writeCourses", auth, (req, res) => {
   // Courses Search validation
-  const { errors, isValid } = validateCoursesInput(req.body);
+  const { errors, isValid } = validateWriteCoursesInputVar(req.body);
   // Check validation
   if (!isValid) {
     return res.status(400).json(errors);
@@ -70,7 +70,7 @@ function GenerateUniqueID() {
 
 //drop courses
 router.post("/dropCourses", auth, (req, res) => {
-  const { errors, isValid } = validateDropCoursesInput(req.body);
+  const { errors, isValid } = validateDropCoursesInputVar(req.body);
   // Check validation
   if (!isValid) {
     return res.status(400).json(errors);
@@ -89,7 +89,7 @@ router.post("/dropCourses", auth, (req, res) => {
 
 //drop all courses
 router.post("/dropAllCourses", auth, (req, res) => {
-  const { errors, isValid } = validateDropAllCoursesInput(req.body);
+  const { errors, isValid } = validateDropAllCoursesInputVar(req.body);
   if (!isValid) {
     return res.status(400).json(errors);
   }
