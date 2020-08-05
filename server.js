@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const users = require("./routes/api/user-api");
 const courses = require("./routes/api/courses-api");
-
+const groups = require("./routes/api/groups-api");
 const app = express();
 // Bodyparser middleware for json
 app.use(
@@ -28,6 +28,7 @@ require("./config/passport")(passport);
 // Routes
 app.use("/api/user-api", users);
 app.use("/api/courses-api", courses);
+app.use("/api/groups-api", groups);
 
 const port = process.env.PORT || 5000; // process.env.port for Heroku and 5000 for local
 app.listen(port, () =>
