@@ -6,6 +6,10 @@ const users = require("./routes/api/user-api");
 const courses = require("./routes/api/courses-api");
 const groups = require("./routes/api/groups-api");
 const app = express();
+
+var cors = require('cors')
+app.use(cors()) // Use this after the variable declaration
+
 // Bodyparser middleware for json
 app.use(
   bodyParser.urlencoded({
