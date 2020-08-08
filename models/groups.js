@@ -18,11 +18,7 @@ const GroupSchema = new Schema({
     type: String,
     required: true,
   },
-  course_name: {
-    type: String,
-    required: true,
-  },
-  start_date: {
+  date_started: {
     type: Date,
     required: Date.now,
   },

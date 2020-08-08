@@ -34,5 +34,9 @@ const CourseSchema = new Schema({
     type: Date,
     required: Date.now,
   },
+  assignments_list: {
+    type: String,
+    required: true,
+  },
 });
 module.exports = Courses = mongoose.model("courses", CourseSchema);
