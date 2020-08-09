@@ -24,11 +24,11 @@ router.post("/writeGroups", auth, (req, res) => {
   }
   var groupStored = false;
   var courseStored = false;
-  var full_name = req.body.first_name + req.body.last_name;
+  var full_name = req.body.first_name + " " +req.body.last_name;
       const newGroup = new Groups({
         course_name: req.body.course_name,
-        member_list_names: full_name,
-        member_list_emails: req.body.email,
+        member_list_names: full_name + " ",
+        member_list_emails: req.body.email + " ",
         course_link: req.body.course_link,
         date_started: req.body.date_started,
         expected_end_date: req.body.expected_end_date,
@@ -83,8 +83,18 @@ router.post("/enrollGroups", auth, (req, res) => {
         .status(400)
         .json({ course: "Course Not Found" });
     }else{
-      //var names = course.member_list_names + req.body.first_name + req.body.last_name;
-      //var emails = course.member_list_emails + req.body.email;
+      var names = course[0].member_list_names + req.body.first_name + " " +req.body.last_name;
+      var emails = course[0].member_list_emails + req.body.email;
+      Groups.updateOne({
+            course_name: req.body.course_name,
+        }, {
+            $set: {
+              member_list_names:names + " ",
+              member_list_emails: emails + " ",
+            }
+        }, function(err, results) {
+            console.log(results.result);
+        });
      }
 
   Courses.findOne({
