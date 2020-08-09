@@ -89,7 +89,7 @@ router.post("/enrollGroups", auth, (req, res) => {
             course_name: req.body.course_name,
         }, {
             $set: {
-              member_list_names:names + " ",
+              member_list_names:names + ";",
               member_list_emails: emails + " ",
             }
         }, function(err, results) {
