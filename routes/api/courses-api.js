@@ -18,7 +18,7 @@ router.post("/getCourses", auth, (req, res) => {
   if (!isValid) {
     return res.status(400).json(errors);
   }
-  Courses.findOne({ email: req.body.email })
+  Courses.find({ email: req.body.email })
     .then((courses) => {
       if (courses) {
         res.json(courses);
